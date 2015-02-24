@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 public class BattleshipGrid extends JPanel {
 	private JLabel grid[][];
 	private ArrayList<Battleship> ships;
+	private String myString = new String("ABCDEFGHIJ");
 	
 	BattleshipGrid() {
 		grid = new JLabel[10][10];
@@ -23,7 +24,7 @@ public class BattleshipGrid extends JPanel {
 		
 		setLayout(new GridLayout(11,11));
 		for(int i = 0; i < 10; i++) {
-			add(new JLabel(Character.toString((char)(0x41+i))));//0x41 is 'A' increment by i to go down the alphabet
+			add(new JLabel(""+myString.charAt(i)));
 			for(int j = 0; j < 10; j++) {
 				grid[j][i] = new JLabel("?");
 				add(grid[j][i]);
@@ -32,9 +33,9 @@ public class BattleshipGrid extends JPanel {
 		
 		add(new JLabel("")); //fill in the bottom left corner
 		
-		for(int i = 0; i < 9; i++) {
-			add(new JLabel("  "+Character.toString((char)(0x31+i))));//0x31 is '1' increment by i to increase value
-		}add(new JLabel("  "+Character.toString((char)(0x31))+Character.toString((char)(0x30))));// 0x30,0x31 = '1''0'
+		for(int i = 0; i < 10; i++) {
+			add(new JLabel(""+i));
+		}
 	}
 	
 	public int getNumSunk() {

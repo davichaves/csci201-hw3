@@ -6,11 +6,12 @@ public class BattleshipGame {
 	
 	public static Scanner scan = new Scanner(System.in);
 	
-	private BattleshipGrid bsg;
+	private BattleshipGrid bsg, bsg2;
 	
 	BattleshipGame() {
 		bsg = new BattleshipGrid();
-		new BattleshipFrame(bsg);
+		bsg2 = new BattleshipGrid();
+		new BattleshipFrame(bsg, bsg2);
 	}
 	
 	public static void main(String[] args) {
@@ -37,6 +38,6 @@ public class BattleshipGame {
 	private void readFile() {
 		do {
 			System.out.print("Please enter a valid file path:");
-		} while(!bsg.loadMap(scan.nextLine()));
+		} while(!bsg.loadMap("battle.txt"));
 	}
 }
