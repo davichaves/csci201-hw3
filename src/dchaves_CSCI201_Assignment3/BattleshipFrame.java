@@ -1,47 +1,45 @@
 package dchaves_CSCI201_Assignment3;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 @SuppressWarnings("serial")
 public class BattleshipFrame extends JFrame{
 	
 	public BattleshipFrame(BattleshipGrid bsgp, BattleshipGrid bsgc) {
 		super("Battleship");
-		JLabel pLabel = new JLabel("Player");
-		JLabel cLabel = new JLabel("Computer");		
-		
-//		JPanel player = new JPanel();
-		
-//		player.add(playerLabel);
-//		player.add(bsgPlayer);
-		
-//		JPanel computer = new JPanel();
+		setLayout(new GridLayout(1,2));
 
-//		computer.add(computerLabel);
-//		computer.add(bsgComputer);
+		JLabel pLabel = new JLabel("Player", SwingConstants.CENTER);
+		JLabel cLabel = new JLabel("Computer", SwingConstants.CENTER);
+		JLabel log = new JLabel("Log:");
+				
+		bsgp.setBorder(BorderFactory.createLineBorder(Color.black));
+		bsgc.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
+		JPanel player = new JPanel(new BorderLayout());
+		player.add(bsgp,BorderLayout.CENTER);
+		player.add(pLabel,BorderLayout.PAGE_START);
+		player.add(log, BorderLayout.PAGE_END);
+
+		JPanel computer = new JPanel(new BorderLayout());
+		computer.add(bsgc,BorderLayout.CENTER);
+		computer.add(cLabel, BorderLayout.PAGE_START);
+				
+		add(player);
+		add(computer);
 		
-		c.gridx = 0;
-		c.gridy = 0;
-		add(pLabel, c);
-		c.gridx = 0;
-		c.gridy = 1;
-		add(bsgp, c);
-		c.gridx = 1;
-		c.gridy = 0;
-		add(cLabel, c);
-		c.gridx = 1;
-		c.gridy = 1;
-		add(bsgc, c);
-		
-		setSize(1280,480);
+		setSize(880,480);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setVisible(true);
