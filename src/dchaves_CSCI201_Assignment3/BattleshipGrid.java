@@ -1,5 +1,6 @@
 package dchaves_CSCI201_Assignment3;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.io.File;
@@ -8,8 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class BattleshipGrid extends JPanel {
@@ -20,12 +24,13 @@ public class BattleshipGrid extends JPanel {
 	BattleshipGrid() {
 		grid = new JLabel[10][10];
 		ships = new ArrayList<Battleship>();
-		
+		setBackground(Color.yellow);
 		setLayout(new GridLayout(11,11));
 		for(int i = 0; i < 10; i++) {
 			add(new JLabel(""+myString.charAt(i)));
 			for(int j = 0; j < 10; j++) {
 				grid[j][i] = new JLabel("?");
+				grid[j][i].setBorder(BorderFactory.createLineBorder(Color.red));
 				add(grid[j][i]);
 			}
 		}
@@ -35,6 +40,7 @@ public class BattleshipGrid extends JPanel {
 		for(int i = 0; i < 10; i++) {
 			add(new JLabel(""+i));
 		}
+		
 	}
 	
 	public int getNumSunk() {
