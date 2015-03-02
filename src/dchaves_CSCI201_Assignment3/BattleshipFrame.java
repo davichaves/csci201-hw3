@@ -42,14 +42,19 @@ public class BattleshipFrame extends JFrame{
 	private JMenuBar jmb;
 	private JMenu infoMenu;
 	private JMenuItem infoMenuItem, infoMenuItem2;
+	private BattleshipGrid bsgp, bsgc;
 	
-	public BattleshipFrame(BattleshipGrid bsgp, BattleshipGrid bsgc) {
+	
+	public BattleshipFrame() {
 		super("Battleship");
 		setLayout(new GridLayout(1,2));
+		
+		bsgp = new BattleshipGrid();
+		bsgc = new BattleshipGrid();
 
 		JLabel pLabel = new JLabel("Player", SwingConstants.CENTER);
 		JLabel cLabel = new JLabel("Computer", SwingConstants.CENTER);
-		JLabel log = new JLabel("Log: Edit mode");
+		JLabel log = new JLabel("Log: Edit mode, click to place ships!");
 		file = new JLabel("File:");
 		log.setFont(new Font("Arial", Font.PLAIN, 24));
 		
@@ -66,12 +71,14 @@ public class BattleshipFrame extends JFrame{
 			    chooser.setFileFilter(filter);
 			    int returnVal = chooser.showOpenDialog(getParent());
 			    if(returnVal == JFileChooser.APPROVE_OPTION) {
-			       file.setText("File: " + chooser.getSelectedFile().getName().replaceFirst("[.][^.]+$", ""));
+			    	bsgc.loadMap(chooser.getSelectedFile().getName());
+			    	file.setText("File: " + chooser.getSelectedFile().getName().replaceFirst("[.][^.]+$", ""));
 			    }
 			}
 		});
 		
 		JButton start = new JButton("START");
+		start.setEnabled(false);
 		
 		chooseFile.add(selectFile);
 		chooseFile.add(file);
@@ -138,7 +145,7 @@ public class BattleshipFrame extends JFrame{
             JScrollPane scrollPane = new JScrollPane(textArea);
             dialog.add(scrollPane, BorderLayout.CENTER);
             dialog.setTitle("About");
-            dialog.setSize(400,400);
+            dialog.setSize(700,400);
             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
             dialog.setLocationRelativeTo(null);
             dialog.setVisible(true);

@@ -1,18 +1,28 @@
 package dchaves_CSCI201_Assignment3;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
@@ -27,9 +37,24 @@ public class BattleshipGrid extends JPanel {
 		setBackground(Color.yellow);
 		setLayout(new GridLayout(11,11));
 		for(int i = 0; i < 10; i++) {
-			add(new JLabel(""+myString.charAt(i)));
+			add(new JLabel(""+myString.charAt(i), SwingConstants.CENTER));
 			for(int j = 0; j < 10; j++) {
-				grid[j][i] = new JLabel("?");
+				grid[j][i] = new JLabel("?", SwingConstants.CENTER);
+				grid[j][i].addMouseListener(new MouseAdapter() {  
+				    public void mouseClicked(MouseEvent e) {  
+				    	JDialog dialog = new JDialog();
+				    	String[] strings = {"Cruiser", "Destroyer", "Carrier", "Battleship"};
+				    	JComboBox<Object> list = new JComboBox<Object>(strings);
+				    	list.setSelectedIndex(0);
+			            dialog.setLayout(new BorderLayout());
+			            dialog.add(list, BorderLayout.PAGE_START);
+			            dialog.setTitle("add ship");
+			            dialog.setSize(200,200);
+			            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			            dialog.setLocationRelativeTo(null);
+			            dialog.setVisible(true);
+				    }  
+				}); 
 				grid[j][i].setBorder(BorderFactory.createLineBorder(Color.red));
 				add(grid[j][i]);
 			}
@@ -38,7 +63,7 @@ public class BattleshipGrid extends JPanel {
 		add(new JLabel("")); //fill in the bottom left corner
 		
 		for(int i = 0; i < 10; i++) {
-			add(new JLabel(""+i));
+			add(new JLabel(""+i, SwingConstants.CENTER));
 		}
 		
 	}
